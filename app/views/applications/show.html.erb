@@ -8,3 +8,17 @@
     <p><%= pet.name %></p>
   <% end %>
 <h3>Status: <%= @application.status %></h3>
+<% if params[:search] %>
+  <% @pets.each do |pet| %>
+  <section id="Pet-<%= pet.id %>">
+    <h3>
+      <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+      <%= button_to 'Adopt this Pet', {:controller => "pet_applications", :action => "create", :pet_id => pet.id} , :method=>:post %>
+    </h3>
+    <p><%= pet.age %> years old</p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+    <p><%= pet.shelter_name %></p>
+  </section>
+  <% end %>
+<% end %>
