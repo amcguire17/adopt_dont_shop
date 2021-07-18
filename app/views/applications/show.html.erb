@@ -1,0 +1,49 @@
+<h1><%= @application.applicant_name %></h1>
+<h3><%= @application.applicant_street_address %></h3>
+<h3><%= @application.applicant_city %>, <%= @application.applicant_state %> <%= @application.applicant_zip_code %></h3>
+<h3>Why applicant would have a good home for pets:</h3>
+<p><%= @application.description %></p>
+<h3>Name of pets applicant wants to adopt:</h3>
+  <% @application.pets.each do |pet| %>
+    <p><%= pet.name %></p>
+  <% end %>
+<h3>Status: <%= @application.status %></h3>
+
+<% if @application.status == 'In Progress' %>
+  <h3>Add Pets to Adopt:</h3>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag 'Search' %>
+    <% end %>
+<% end %>
+
+<% if params[:search] %>
+  <% @pets.each do |pet| %>
+  <section id="Pet-<%= pet.id %>">
+    <h3>
+      <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+      <%= button_to 'Adopt this Pet', {:controller => "pet_applications", :action => "create", :pet_id => pet.id} , :method=>:post %>
+    </h3>
+    <p><%= pet.age %> years old</p>
+    <p><%= pet.breed %></p>
+    <p><%= pet.adoptable %></p>
+    <p><%= pet.shelter_name %></p>
+  </section>
+  <% end %>
+<% end %>
+
+<% if @application.pets != [] && @application.status == 'In Progress' %>
+  <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+    <h3><%= f.label :description, 'Why I would make a good owner for these pet(s):' %></h3>
+    <p> <%= f.text_field :description %> </p>
+
+    <%= f.hidden_field :applicant_name, value: @application.applicant_name %>
+    <%= f.hidden_field :applicant_street_address, value: @application.applicant_street_address  %>
+    <%= f.hidden_field :applicant_city, value: @application.applicant_city  %>
+    <%= f.hidden_field :applicant_state, value: @application.applicant_state  %>
+    <%= f.hidden_field :applicant_zip_code, value: @application.applicant_zip_code  %>
+    <%= f.hidden_field :status, value: 'Pending' %>
+
+    <%= f.submit 'Submit Application' %>
+  <% end %>
+<% end %>
