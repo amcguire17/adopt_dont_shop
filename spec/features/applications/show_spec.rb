@@ -8,6 +8,21 @@ RSpec.describe 'Application Show Page' do
     @app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', status: 'In Progress')
   end
   it 'shows an application and all attributes' do
+    @app.pets << @pet_1
+    @app.pets << @pet_2
+
+    visit "/applications/#{@app.id}"
+
+    expect(page).to have_content(@app.applicant_name)
+    expect(page).to have_content(@app.applicant_street_address)
+    expect(page).to have_content(@app.applicant_city)
+    expect(page).to have_content(@app.applicant_state)
+    expect(page).to have_content(@app.applicant_zip_code)
+    expect(page).to have_content(@app.status)
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_2.name)
+  end
+
   it 'can search for a pet' do
     visit "/applications/#{@app.id}"
 
