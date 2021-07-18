@@ -8,6 +8,15 @@
     <p><%= pet.name %></p>
   <% end %>
 <h3>Status: <%= @application.status %></h3>
+
+<% if @application.status == 'In Progress' %>
+  <h3>Add Pets to Adopt:</h3>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag 'Search' %>
+    <% end %>
+<% end %>
+
 <% if params[:search] %>
   <% @pets.each do |pet| %>
   <section id="Pet-<%= pet.id %>">

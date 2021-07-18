@@ -19,6 +19,20 @@ RSpec.describe 'Application Show Page' do
 
   end
 
+  it 'can add pet to application' do
+    visit "/applications/#{@app.id}"
+
+    fill_in :search, with: 'Lobster'
+    click_button 'Search'
+
+    within("#Pet-#{@pet_2.id}") do
+      click_button 'Adopt this Pet'
+    end
+
+    expect(current_path).to eq("/applications/#{@app.id}")
+    expect(@app.pets).to eq([@pet_2])
+  end
+
   it 'can search for animal by partial matches' do
     visit "/applications/#{@app.id}"
 
