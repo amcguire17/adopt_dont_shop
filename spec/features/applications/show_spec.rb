@@ -33,6 +33,41 @@ RSpec.describe 'Application Show Page' do
     expect(@app.pets).to eq([@pet_2])
   end
 
+  it 'can submit and enter description when pets have been selected' do
+    @app.pets << @pet_2
+
+    visit "/applications/#{@app.id}"
+
+    fill_in :description, with: 'I have a big yard'
+    click_button 'Submit Application'
+
+    expect(current_path).to eq("/applications/#{@app.id}")
+    expect(page).to have_content("Pending")
+    expect(page).to have_content(@pet_2.name)
+    expect(page).to have_content('I have a big yard')
+    expect(page).to_not have_content('Add Pets to Adopt:')
+  end
+
+  it 'can return error message when all fields are not filled in' do
+    @app.pets << @pet_2
+
+    visit "/applications/#{@app.id}"
+
+    fill_in :description, with: ''
+    click_button 'Submit Application'
+
+    click_button 'Submit'
+
+    expect(page).to have_current_path("/applications/#{@app.id}")
+    expect(page).to have_content("Error: Description can't be blank")
+  end
+
+  it 'cannot submit form if not animals have been selected' do
+    visit "/applications/#{@app.id}"
+
+    expect(page).to_not have_button('Submit Application')
+  end
+
   it 'can search for animal by partial matches' do
     visit "/applications/#{@app.id}"
 

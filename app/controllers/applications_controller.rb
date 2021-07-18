@@ -38,6 +38,8 @@ class ApplicationsController < ApplicationController
   def application_params
     params.require(:application).permit(:applicant_name, :applicant_street_address, :applicant_city, :applicant_state, :applicant_zip_code, :description, :status)
   end
+
+  def update_params
     params.permit(:applicant_name, :applicant_street_address, :applicant_city, :applicant_state, :applicant_zip_code, :description, :status)
   end
 end
