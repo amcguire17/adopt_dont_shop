@@ -79,7 +79,7 @@ RSpec.describe 'Application Show Page' do
       click_button 'Approve Application'
     end
 
-    expect(page.find('h2')).to have_content('Approved')
+    expect(page.find('h3.status')).to have_content('Approved')
   end
 
   it 'application status changes to reject if any pets have been rejected' do
@@ -90,7 +90,7 @@ RSpec.describe 'Application Show Page' do
       click_button 'Approve Application'
     end
 
-    expect(page.find('h2')).to have_content('Rejected')
+    expect(page.find('h3.status')).to have_content('Rejected')
   end
 
   it 'when application has been approved pet is no longer adoptable' do
