@@ -1,0 +1,20 @@
+<h1>Application for <%= @application.applicant_name %> </h1>
+
+<h2><%= @application.status %></h2>
+
+<% @application.pets.each do |pet| %>
+  <section id="pet-<%= pet.id %>">
+    <h3><%= pet.name %></h3>
+    <p><%= @application.description %></p>
+    <% if @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Approved' %>
+      <h4>Pet Approved</h4>
+    <% elsif @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Rejected' %>
+      <h4>Pet Rejected</h4>
+    <% elsif pet.adoptable == false %>
+      <%= button_to 'Reject Application', "/admin/applications/#{@application.id}", params: {status: 'Rejected', pet_id: pet.id},method: :patch %>
+    <% else %>
+      <%= button_to 'Approve Application', "/admin/applications/#{@application.id}", params: {status: 'Approved', pet_id: pet.id}, method: :patch %>
+      <%= button_to 'Reject Application', "/admin/applications/#{@application.id}", params: {status: 'Rejected', pet_id: pet.id},method: :patch %>
+    <% end %>
+  </section>
+<% end %>
