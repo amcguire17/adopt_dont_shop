@@ -21,7 +21,7 @@
   <% @pets.each do |pet| %>
   <section id="Pet-<%= pet.id %>">
     <h3>
-      <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
       <%= button_to 'Adopt this Pet', {:controller => "pet_applications", :action => "create", :pet_id => pet.id} , :method=>:post %>
     </h3>
     <p><%= pet.age %> years old</p>
