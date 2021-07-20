@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'the shelters index' do
   before(:each) do
-    @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
-    @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
-    @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+    @shelter_1 = Shelter.create!(name: 'Aurora shelter', address: '1234 North Street', city: 'Aurora, CO', zip_code: '80010', foster_program: false, rank: 9)
+    @shelter_2 = Shelter.create(name: 'RGV animal shelter', address: '6789 5th Street', city: 'Harlingen, TX', zip_code: '78551', foster_program: false, rank: 5)
+    @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', address: '5873 186th Avenue', city: 'Denver, CO', zip_code: '80120', foster_program: true, rank: 10)
     @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
