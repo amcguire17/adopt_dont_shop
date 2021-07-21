@@ -1,11 +1,6 @@
 <h1>All pets</h1>
 
-<%= form_with url: "/pets", method: :get, local: true do |f| %>
-  <%= f.label :search %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
-<% end %>
-
+<%= render partial: 'search', locals: { path: "/pets", method: :get } %>
 
 <% @pets.each do |pet| %>
   <h3><%= pet.name %></h3>
@@ -13,8 +8,9 @@
   <p>Breed: <%= pet.breed %></p>
   <p>Adoptable: </p>
   <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
-  <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit" %>
-  <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete %>
+
+  <%= render partial: 'link', locals: { name: "Edit #{pet.name}",path: "/pets/#{pet.id}/edit", method: :get } %>
+  <%= render partial: 'link', locals: { name: "Delete #{pet.name}",path: "/pets/#{pet.id}", method: :delete } %>
 <% end %><br><br>
 
-<%= link_to 'New Application', '/applications/new' %>
+<%= render partial: 'link', locals: { name: 'New Application', path: '/applications/new', method: :get } %>
