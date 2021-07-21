@@ -1,2 +1,7 @@
 <h1><%= @shelter.name %></h1>
 <h3><%= Shelter.full_address(@shelter.id) %></h3>
+
+<section class='statistics'>
+  <h2>Statistics</h2>
+  <p>Average Pet Age: <%= @shelter.average_pet_age %></p>
+</section>
