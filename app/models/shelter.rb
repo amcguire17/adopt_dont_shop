@@ -52,4 +52,8 @@ class Shelter < ApplicationRecord
     pets.average(:age).to_i
   end
 
+  def adopted_pet_count
+    pets.select('applications.*').joins(:applications).where('applications.status = ?', 'Approved').count
+  end
+
 end

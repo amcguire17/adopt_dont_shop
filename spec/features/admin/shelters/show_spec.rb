@@ -22,5 +22,14 @@ RSpec.describe 'Admin Shelter Show Page' do
       expect(page).to have_content('Adoptable Pet Count: 2')
     end
 
+    it 'shows number of adoptable pets of shelter' do
+      app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'I like pets', status: 'Approved')
+      PetApplication.create!(application: app, pet: @pet_1, status: 'Approved')
+
+      visit "/admin/shelters/#{@shelter.id}"
+      expect(page).to have_content('Adopted Pet Count: 1')
+    end
+  end
+
   end
 end

@@ -102,5 +102,12 @@ RSpec.describe Shelter, type: :model do
       end
     end
 
+    describe '.adopted_pet_count' do
+      it 'returns the number of pets that have been adopted' do
+        app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'I like pets', status: 'Approved')
+        PetApplication.create!(application: app, pet: @pet_1, status: 'Approved')
+        expect(@shelter_1.adopted_pet_count).to eq(1)
+      end
+    end
   end
 end
