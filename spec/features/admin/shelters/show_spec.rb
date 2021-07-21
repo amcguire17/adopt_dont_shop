@@ -31,5 +31,16 @@ RSpec.describe 'Admin Shelter Show Page' do
     end
   end
 
+  describe 'Action Required' do
+    it 'lists pets that have pending applications' do
+      app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'I like pets', status: 'Pending')
+      PetApplication.create!(application: app, pet: @pet_1, status: 'Pending')
+      app_2 = Application.create!(applicant_name: 'Gary', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'I like pets', status: 'Pending')
+      PetApplication.create!(application: app_2, pet: @pet_1, status: 'Pending')
+
+      visit "/admin/shelters/#{@shelter.id}"
+      expect(page).to have_content(@pet_1.name)
+    end
+
   end
 end

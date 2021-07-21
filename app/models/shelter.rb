@@ -56,4 +56,7 @@ class Shelter < ApplicationRecord
     pets.select('applications.*').joins(:applications).where('applications.status = ?', 'Approved').count
   end
 
+  def pets_pending_applications
+    pets.joins(:applications).where('applications.status = ?', 'Pending').distinct
+  end
 end
