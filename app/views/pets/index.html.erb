@@ -4,10 +4,12 @@
 
 <% @pets.each do |pet| %>
   <h3><%= pet.name %></h3>
-  <p>Age: <%= pet.age %></p>
-  <p>Breed: <%= pet.breed %></p>
-  <p>Adoptable: </p>
-  <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
+  <p>
+    Age: <%= pet.age %><br>
+    Breed: <%= pet.breed %><br>
+    Adoptable: <br>
+    You can find <%= pet.name %> at <%= pet.shelter_name %>!
+  </p>
 
   <%= render partial: 'link', locals: { name: "Edit #{pet.name}",path: "/pets/#{pet.id}/edit", method: :get } %>
   <%= render partial: 'link', locals: { name: "Delete #{pet.name}",path: "/pets/#{pet.id}", method: :delete } %>

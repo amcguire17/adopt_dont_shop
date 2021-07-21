@@ -13,48 +13,78 @@
  *= require_tree .
  *= require_self
  */
- * {
-   box-sizing: border-box;
- }
+* {
+  box-sizing: border-box;
+}
 
- body {
-   margin: 0;
-   font-family: Monospace, Monaco, Nova Mono;
-   margin-left: 150px;
-   padding-left: 20px;
-   background-color: #0072bb;
-   color: #f5e6d3;
- }
+body {
+  margin: 0;
+  font-family: Monospace, Monaco, Nova Mono;
+  margin-left: 150px;
+  padding-left: 20px;
+  background-color: #0072bb;
+  color: #f5e6d3;
+}
 
- /* Style the side navigation */
- .sidenav {
-   height: 100%;
-   width: 150px;
-   position: fixed;
-   z-index: 1;
-   top: 0;
-   left: 0;
-   background-color: MidnightBlue;
-   overflow-x: hidden;
- }
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: MidnightBlue;
+  overflow-x: hidden;
+}
 
 
- /* Side navigation links */
- .sidenav a {
-   color: #fdde01;
-   padding: 16px;
-   text-decoration: none;
-   display: block;
- }
+/* Side navigation links */
+.sidenav a {
+  color: #fdde01;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
 
- /* Change color on hover */
- .sidenav a:hover {
-   background-color: #f5e6d3;
-   color: MidnightBlue;
- }
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #f5e6d3;
+  color: MidnightBlue;
+}
 
- /* Welcome Background Image */
- img {
-   position: absolute;
-   height: 100%;
- }
+/* Welcome Background Image */
+img {
+  position: absolute;
+  height: 100%;
+}
+
+a {
+  color: #f5e6d3;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+h1 {
+  padding-bottom: 20px;
+  color: #e5b7dd;
+}
+
+label {
+  width: 100px;
+  display: inline-block;
+}
+
+input[type='submit'] {
+  background-color: white;
+  color: #c23336;
+  border-radius: 4px;
+  text-align: center;
+  align-self: center;
+  display: inline-block;
+}
+
+input[type='submit']:hover {
+  background-color: #c23336;
+  color: white;
+}
