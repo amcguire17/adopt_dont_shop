@@ -22,6 +22,8 @@
    font-family: Monospace, Monaco, Nova Mono;
    margin-left: 150px;
    padding-left: 20px;
+   background-color: #0072bb;
+   color: #f5e6d3;
  }
 
  /* Style the side navigation */
@@ -32,14 +34,14 @@
    z-index: 1;
    top: 0;
    left: 0;
-   background-color: #111;
+   background-color: MidnightBlue;
    overflow-x: hidden;
  }
 
 
  /* Side navigation links */
  .sidenav a {
-   color: white;
+   color: #fdde01;
    padding: 16px;
    text-decoration: none;
    display: block;
@@ -47,6 +49,12 @@
 
  /* Change color on hover */
  .sidenav a:hover {
-   background-color: #ddd;
-   color: black;
+   background-color: #f5e6d3;
+   color: MidnightBlue;
+ }
+
+ /* Welcome Background Image */
+ img {
+   position: absolute;
+   height: 100%;
  }
