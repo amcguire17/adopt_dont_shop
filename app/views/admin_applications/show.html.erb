@@ -1,11 +1,15 @@
 <h1>Application for <%= @application.applicant_name %> </h1>
 
-<h2><%= @application.status %></h2>
+<h2>Application Status:</h2>
+<h3 class="status"><%= @application.status %></h3>
 
+<h2>Applicant description on why they would make a good owner for the pets below:</h2>
+<p><%= @application.description %></p>
+
+<h2>Pets Applying For:</h2>
 <% @application.pets.each do |pet| %>
   <section id="pet-<%= pet.id %>">
     <h3><%= pet.name %></h3>
-    <p><%= @application.description %></p>
     <% if @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Approved' %>
       <h4>Pet Approved</h4>
     <% elsif @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Rejected' %>
