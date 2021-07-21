@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Application Show Page' do
   before :each do
-    @shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    @shelter = Shelter.create!(name: 'Aurora shelter', address: '1234 North Street', city: 'Aurora, CO', zip_code: '80010', foster_program: false, rank: 9)
     @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
     @pet_2 = Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
     @app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'Please let me adopt a pet', status: 'Pending')
@@ -66,7 +66,6 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/admin/applications/#{app_2.id}"
-
     expect(page).to have_button('Approve Application')
     expect(page).to have_button('Reject Application')
   end
@@ -78,8 +77,7 @@ RSpec.describe 'Application Show Page' do
     within("#pet-#{@pet_2.id}") do
       click_button 'Approve Application'
     end
-
-    expect(page.find('h2')).to have_content('Approved')
+    expect(page.find('h3.status')).to have_content('Approved')
   end
 
   it 'application status changes to reject if any pets have been rejected' do
@@ -89,8 +87,7 @@ RSpec.describe 'Application Show Page' do
     within("#pet-#{@pet_2.id}") do
       click_button 'Approve Application'
     end
-
-    expect(page.find('h2')).to have_content('Rejected')
+    expect(page.find('h3.status')).to have_content('Rejected')
   end
 
   it 'when application has been approved pet is no longer adoptable' do
@@ -102,7 +99,6 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/pets/#{@pet_1.id}"
-
     expect(page).to have_content(false)
   end
 
@@ -118,11 +114,8 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/admin/applications/#{app_2.id}"
-
     within("#pet-#{@pet_1.id}") do
-
     end
-
     expect(page).to_not have_button('Approve Application')
   end
 end

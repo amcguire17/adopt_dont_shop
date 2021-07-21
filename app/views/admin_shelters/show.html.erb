@@ -1,0 +1,21 @@
+<h1><%= @shelter.name %></h1>
+<h3><%= Shelter.full_address(@shelter.id) %></h3>
+
+<section class='statistics'>
+  <h2>Statistics</h2>
+  <p>Average Pet Age: <%= @shelter.average_pet_age %></p>
+  <p>Adoptable Pet Count: <%= @shelter.adoptable_pet_count %></p>
+  <p>Adopted Pet Count: <%= @shelter.adopted_pet_count %></p>
+</section>
+
+<section class='action-required'>
+  <h2>Action Required</h2>
+  <% @pets.each do |pet| %>
+    <p><%= pet.name %></p>
+    <% pet.applications.each do |application| %>
+      <% if application.status == 'Pending' %>
+        <p><%= link_to "#{application.applicant_name} Application Page", "/admin/applications/#{application.id}"%></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>
