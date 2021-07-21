@@ -57,6 +57,12 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.pending_applications).to eq([@shelter_1])
       end
     end
+
+    describe '#full_address' do
+      it 'returns the full address of a shelter' do
+        expect(Shelter.full_address(@shelter_1.id)).to eq('1234 North Street, Aurora, CO 80010')
+      end
+    end
   end
 
   describe 'instance methods' do

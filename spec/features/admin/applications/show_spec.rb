@@ -66,7 +66,6 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/admin/applications/#{app_2.id}"
-
     expect(page).to have_button('Approve Application')
     expect(page).to have_button('Reject Application')
   end
@@ -78,7 +77,6 @@ RSpec.describe 'Application Show Page' do
     within("#pet-#{@pet_2.id}") do
       click_button 'Approve Application'
     end
-
     expect(page.find('h3.status')).to have_content('Approved')
   end
 
@@ -89,7 +87,6 @@ RSpec.describe 'Application Show Page' do
     within("#pet-#{@pet_2.id}") do
       click_button 'Approve Application'
     end
-
     expect(page.find('h3.status')).to have_content('Rejected')
   end
 
@@ -102,7 +99,6 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/pets/#{@pet_1.id}"
-
     expect(page).to have_content(false)
   end
 
@@ -118,11 +114,8 @@ RSpec.describe 'Application Show Page' do
     end
 
     visit "/admin/applications/#{app_2.id}"
-
     within("#pet-#{@pet_1.id}") do
-
     end
-
     expect(page).to_not have_button('Approve Application')
   end
 end
