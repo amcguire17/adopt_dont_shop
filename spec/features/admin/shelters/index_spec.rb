@@ -12,20 +12,28 @@ RSpec.describe 'the shelters index' do
     @app_2 = Application.create!(applicant_name: 'Yolanda Garcia', applicant_street_address: '5274 Arapahoe Road', applicant_city: 'Centennial', applicant_state: 'CO', applicant_zip_code: '80110', description: 'Pets are neat', status: 'Pending')
     @app_1.pets << @pet_1
     @app_2.pets << @pet_2
+    visit '/admin/shelters'
   end
 
   it 'lists all the shelters by name in reverse' do
-    visit '/admin/shelters'
-
     expect(@shelter_2.name).to appear_before(@shelter_3.name)
     expect(@shelter_3.name).to appear_before(@shelter_1.name)
   end
 
   it 'lists shelters with pending applications' do
+    within('#pending-app') do
+      expect(page).to have_content(@shelter_1.name)
+    end
+  end
+
+  it 'lists shelters with pending applications' do
+    app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'applying for pet', status: 'Pending')
+    app.pets << @pet_3
+
     visit '/admin/shelters'
 
     within('#pending-app') do
-      expect(page).to have_content(@shelter_1.name)
+      expect(@shelter_1.name).to appear_before(@shelter_3.name)
     end
   end
 end

@@ -21,7 +21,8 @@ class Shelter < ApplicationRecord
   end
 
   def self.pending_applications
-    Shelter.joins(pets: [:applications]).where('applications.status = ?', 'Pending')
+    Shelter.joins(pets: [:applications]).where('applications.status = ?', 'Pending').order(:name).distinct
+  end
 
   def self.full_address(id)
     find_by_sql("SELECT concat(address,', ', city, ' ', zip_code) as full_address  FROM shelters WHERE id = #{id}").pluck(:full_address).first
