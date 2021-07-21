@@ -15,10 +15,10 @@
     <% elsif @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Rejected' %>
       <h4>Pet Rejected</h4>
     <% elsif pet.adoptable == false %>
-      <%= render partial: 'button', locals: { name: 'Reject Application', status: 'Rejected', pet_id: pet.id } %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
     <% else %>
-      <%= render partial: 'button', locals: { name: 'Approve Application', status: 'Approved', pet_id: pet.id } %>
-      <%= render partial: 'button', locals: { name: 'Reject Application', status: 'Rejected', pet_id: pet.id } %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Approved', pet_id: pet.id, button_name: 'Approve Application' } %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
     <% end %>
   </section>
 <% end %>

@@ -13,11 +13,13 @@ RSpec.describe 'Application Show Page' do
 
   it 'can approve an application show a pet has been adopted' do
     within("#pet-#{@pet_1.id}") do
-      click_button 'Approve Application'
+      click_on 'Approve Application'
     end
 
     expect(page).to_not have_content('Approve Application')
     expect(page).to have_content('Pet Approved')
+
+    visit "/admin/applications/#{@app.id}"
 
     within("#pet-#{@pet_2.id}") do
       expect(page).to have_button('Approve Application')

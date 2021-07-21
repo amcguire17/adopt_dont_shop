@@ -12,7 +12,15 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of(:applicant_city) }
     it { should validate_presence_of(:applicant_state) }
     it { should validate_presence_of(:applicant_zip_code) }
-    it { should validate_presence_of(:description) }
     it { should validate_presence_of(:status) }
+    context "if status is not in progress" do
+      before { allow(subject).to receive(:status_not_in_progress?).and_return(true) }
+      it { should validate_presence_of(:description) }
+    end
+
+    context "if status is in progress" do
+      before { allow(subject).to receive(:status_not_in_progress?).and_return(false) }
+      it { should_not validate_presence_of(:description) }
+    end
   end
 end
