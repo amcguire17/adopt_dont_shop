@@ -14,7 +14,7 @@
     <p><%= pet.name %></p>
     <% pet.applications.each do |application| %>
       <% if application.status == 'Pending' %>
-        <p><%= link_to "#{application.applicant_name} Application Page", "/admin/applications/#{application.id}"%></p>
+        <p><%= render partial: 'link', locals: { name: "#{application.applicant_name} Application Page", path: "/admin/applications/#{application.id}", method: :get } %></p>
       <% end %>
     <% end %>
   <% end %>
