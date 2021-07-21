@@ -8,17 +8,18 @@
 
 <h2>Pets Applying For:</h2>
 <% @application.pets.each do |pet| %>
-  <section id="pet-<%= pet.id %>">
-    <h3><%= pet.name %></h3>
+  <h3><%= pet.name %></h3>
+  <div id="pet-<%= pet.id %>">
     <% if @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Approved' %>
       <h4>Pet Approved</h4>
     <% elsif @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Rejected' %>
       <h4>Pet Rejected</h4>
     <% elsif pet.adoptable == false %>
-      <%= button_to 'Reject Application', "/admin/applications/#{@application.id}", params: {status: 'Rejected', pet_id: pet.id},method: :patch %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
     <% else %>
-      <%= button_to 'Approve Application', "/admin/applications/#{@application.id}", params: {status: 'Approved', pet_id: pet.id}, method: :patch %>
-      <%= button_to 'Reject Application', "/admin/applications/#{@application.id}", params: {status: 'Rejected', pet_id: pet.id},method: :patch %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Approved', pet_id: pet.id, button_name: 'Approve Application' } %>
+      <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
     <% end %>
-  </section>
+  </div>
+
 <% end %>

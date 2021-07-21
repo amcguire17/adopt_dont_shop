@@ -1,27 +1,3 @@
 <h1>New Application</h1>
 
-<%= form_with model: @application, method: :post, local: true do |f| %>
-  <p>
-    <%= f.label :applicant_name, 'Name: ' %>
-    <%= f.text_field :applicant_name %>
-  </p>
-  <p>
-    <%= f.label :applicant_street_address, 'Street Address: '%>
-    <%= f.text_field :applicant_street_address %>
-  </p>
-  <p>
-    <%= f.label :applicant_city, 'City: '%>
-    <%= f.text_field :applicant_city %>
-  </p>
-  <p>
-    <%= f.label :applicant_state, 'State: '%>
-    <%= f.text_field :applicant_state %>
-  </p>
-  <p>
-    <%= f.label :applicant_zip_code, 'Zip Code: '%>
-    <%= f.text_field :applicant_zip_code %>
-  </p>
-  <%= f.hidden_field :status, value: 'In Progress' %>
-
-  <%= f.submit 'Submit' %>
-<% end %>
+<%= render partial: 'form', locals: { model: @application, method: :post } %>

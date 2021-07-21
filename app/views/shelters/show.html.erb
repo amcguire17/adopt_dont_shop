@@ -3,6 +3,6 @@
 <p>City: <%= @shelter.city %></p>
 
 <p class="pet-count">Pets at <%= @shelter.name %>: <%= @shelter.pet_count %></p>
-<p><%= link_to "All pets at #{@shelter.name}", "/shelters/#{@shelter.id}/pets" %></p>
+<p><%= render partial: 'link', locals: { name: "All pets at #{@shelter.name}", path: "/shelters/#{@shelter.id}/pets", method: :get } %></p>
 
-<p><%= link_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete %></p>
+<p><%= render partial: 'link', locals: { name: "Delete #{@shelter.name}", path: "/shelters/#{@shelter.id}", method: :delete } %></p>

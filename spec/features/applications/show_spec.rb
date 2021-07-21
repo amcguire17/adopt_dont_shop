@@ -71,8 +71,6 @@ RSpec.describe 'Application Show Page' do
     fill_in :description, with: ''
     click_button 'Submit Application'
 
-    click_button 'Submit'
-
     expect(page).to have_current_path("/applications/#{@app.id}")
     expect(page).to have_content("Error: Description can't be blank")
   end
