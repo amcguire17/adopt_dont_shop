@@ -12,5 +12,10 @@
   <h2>Action Required</h2>
   <% @pets.each do |pet| %>
     <p><%= pet.name %></p>
+    <% pet.applications.each do |application| %>
+      <% if application.status == 'Pending' %>
+        <p><%= link_to "#{application.applicant_name} Application Page", "/admin/applications/#{application.id}"%></p>
+      <% end %>
+    <% end %>
   <% end %>
 </section>

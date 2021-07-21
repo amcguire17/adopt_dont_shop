@@ -42,5 +42,13 @@ RSpec.describe 'Admin Shelter Show Page' do
       expect(page).to have_content(@pet_1.name)
     end
 
+    it 'links to applications with pending pets' do
+      app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zip_code: '82012', description: 'I like pets', status: 'Pending')
+      PetApplication.create!(application: app, pet: @pet_1, status: 'Pending')
+
+      visit "/admin/shelters/#{@shelter.id}"
+      click_link "#{app.applicant_name} Application Page"
+      expect(current_path).to eq("/admin/applications/#{app.id}")
+    end
   end
 end
