@@ -3,11 +3,9 @@ class AdminApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @pet_application = PetApplication.all
 
-    if @pet_application.status_list_by_application(@application.id).include?('Rejected') &&
-      @pet_application.status_list_by_application(@application.id).exclude?('Pending')
+    if @pet_application.pet_rejected_on_complete_application?(@application.id)
       @application.update(status: 'Rejected')
-    elsif @pet_application.status_list_by_application(@application.id).include?('Approved') &&
-      @pet_application.status_list_by_application(@application.id).exclude?('Pending')
+    elsif @pet_application.all_pets_on_application_reviewed?(@application.id)
       @application.update(status: 'Approved')
       @application.pets.update_all(adoptable: false)
     end

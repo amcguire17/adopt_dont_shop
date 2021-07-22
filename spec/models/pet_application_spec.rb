@@ -29,5 +29,17 @@ RSpec.describe PetApplication, type: :model do
         expect(PetApplication.status_list_by_application(@app.id)).to eq(['Rejected', 'Approved', 'Rejected'])
       end
     end
+
+    describe '.all_pets_on_application_reviewed?' do
+      it 'returns if all pets on application have been approved' do
+        expect(PetApplication.all_pets_on_application_reviewed?(@app.id)).to eq(true)
+      end
+    end
+
+    describe '.pet_rejected_on_complete_application?' do
+      it 'returns if any pet on completed application has been rejected' do
+        expect(PetApplication.pet_rejected_on_complete_application?(@app.id)).to eq(true)
+      end
+    end
   end
 end
